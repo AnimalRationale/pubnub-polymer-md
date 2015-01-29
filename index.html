@@ -7,10 +7,18 @@
     <link rel="import" href="bower_components/paper-input/paper-input.html">
     <link rel="import" href="bower_components/paper-fab/paper-fab.html">
     <link rel="import" href="x-chat-list.html">
+    <link rel="import" href="bower_components/pubnub-polymer/pubnub-element.html">
   </head>
 
   <body fullbleed unresolved>
       <template is="auto-binding">
+
+          <core-pubnub
+              publish_key="pub-c-156a6d5f-22bd-4a13-848d-b5b4d4b36695"
+              subscribe_key="sub-c-f762fb78-2724-11e4-a4df-02ee2ddab7fe"
+              uuid="{{uuid}}">
+          </core-pubnub>
+
           <core-scaffold>
               <!-- Drawer panel -->
               <core-header-panel navigation flex>
@@ -42,11 +50,30 @@
           </core-scaffold>
       </template>
     <script>
-        template.items = [
-            {icon: 'cloud', title: 'PubNub'},
-            {icon: 'polymer', title: 'Polymer'},
-            {icon: 'favorite', title: 'Love'}
-        ];
+        (function() {
+            'use strict';
+            var uuid, avatar, color, cat;
+            // Assign a uuid made of a random cat and a random color
+            var randomColor = function () {
+                var colors = ['navy', 'slate', 'olive', 'moss', 'chocolate', 'buttercup', 'maroon', 'cerise', 'plum', 'orchid'];
+                return colors[(Math.random() * colors.length) >>> 0];
+            };
+            var randomCat = function () {
+                var cats = ['tabby', 'bengal', 'persian', 'mainecoon', 'ragdoll', 'sphynx', 'siamese', 'korat', 'japanesebobtail', 'abyssinian', 'scottishfold'];
+                return cats[(Math.random() * cats.length) >>> 0];
+            };
+
+            color = randomColor();
+            cat = randomCat();
+            uuid = color + '-' + cat;
+            avatar = 'images/' + cat + '.jpg';
+
+            template.items = [
+                {icon: 'cloud', title: 'PubNub'},
+                {icon: 'polymer', title: 'Polymer'},
+                {icon: 'favorite', title: 'Love'}
+            ];
+        })();
     </script>
   </body>
 </html>
