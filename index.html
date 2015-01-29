@@ -6,30 +6,48 @@
     <link rel="import" href="bower_components/core-item/core-item.html">
     <link rel="import" href="bower_components/paper-input/paper-input.html">
     <link rel="import" href="bower_components/paper-fab/paper-fab.html">
+    <link rel="import" href="x-chat-list.html">
   </head>
 
   <body fullbleed unresolved>
-    <core-scaffold>
-      <!-- Drawer panel -->
-      <core-header-panel navigation flex>
-          <core-toolbar class="tall">
-              <!-- an avatar and username will be here -->
-          </core-toolbar>
-      </core-header-panel>
-      <!-- App Title -->
-      <div tool layout horizontal flex>
-          <span flex>Kitteh Anonymous</span>
-          <core-icon icon="account-circle"></core-icon>
-          <span><!-- number of people online --></span>
-      </div>
-      <!-- Main content -->
-      <div flex>
-        <div class="send-message" layout horizontal>
-          <paper-input flex label="Type message..." id="input" value="{{input}}"></paper-input>
-          <paper-fab icon="send" id="sendButton" on-tap="{{sendMyMessage}}"></paper-fab>
-        </div>
-      </div>
-    </core-scaffold>
+      <template is="auto-binding">
+          <core-scaffold>
+              <!-- Drawer panel -->
+              <core-header-panel navigation flex>
+                  <core-toolbar class="tall">
+                      <!-- an avatar and username will be here -->
+                  </core-toolbar>
+              </core-header-panel>
+              <!-- App Title -->
+              <div tool layout horizontal flex>
+                  <span flex>Kitteh Anonymous</span>
+                  <core-icon icon="account-circle"></core-icon>
+                  <span><!-- number of people online --></span>
+              </div>
+              <!-- Main content -->
+              <div flex class="chat-list">
+                  <template repeat="{{message in messages}}">
+                      <x-chat-list color="{{message.color}}"
+                                   avatar="{{message.avatar}}"
+                                   username="{{message.uuid}}"
+                                   text="{{message.text}}"></x-chat-list>
+                  </template>
+              </div>
+              - See more at: http://www.pubnub.com/blog/creating-a-polymer-chat-app-with-material-design/#sthash.EmvZKh36.dpuf
+              <div flex>
+                <div class="send-message" layout horizontal>
+                  <paper-input flex label="Type message..." id="input" value="{{input}}"></paper-input>
+                  <paper-fab icon="send" id="sendButton" on-tap="{{sendMyMessage}}"></paper-fab>
+                </div>
+              </div>
+          </core-scaffold>
+      </template>
+    <script>
+        template.items = [
+            {icon: 'cloud', title: 'PubNub'},
+            {icon: 'polymer', title: 'Polymer'},
+            {icon: 'favorite', title: 'Love'}
+        ];
+    </script>
   </body>
-  - See more at: http://www.pubnub.com/blog/creating-a-polymer-chat-app-with-material-design/#sthash.EmvZKh36.dpuf
 </html>
