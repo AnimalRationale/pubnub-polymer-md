@@ -121,21 +121,7 @@ A single user list with a username, avatar, and desc.
                 } else { // show date
                     var options = {month: 'short', day: 'numeric'};
                 }
-
                 this.time = new Intl.DateTimeFormat(navigator.language, options).format(d);
-
-
-                // Realtime update
-                // if(diff < 60) { // less than 1 min
-                // 	this.time = (diff >>> 0) + 's';
-                // } else if (diff <  3600) { // less than 60 min
-                // 	this.time = ((diff/60) >>> 0) + 'm';
-                // } else if (diff < 86400) { // less than 24 hrs
-                // 	this.time = ((diff/3600) >>> 0) + 'h';
-                // } else {
-                // 	var d = new Date(this.timestamp);
-                // 	this.time = new Intl.DateTimeFormat(navigator.language, options).format(d);
-                // }
             }
         });
     </script>
